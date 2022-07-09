@@ -1,0 +1,10 @@
+FROM alpine:latest AS builder
+RUN apk --no-cache add build-base
+
+FROM builder AS build1
+COPY hw.c source.c
+RUN gcc -static -o /binary source.c
+
+FROM alpine:latest
+COPY --from=build1 /binary /hw
+CMD ["/hw"]
