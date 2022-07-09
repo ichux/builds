@@ -18,15 +18,15 @@ source runimages.sh
 docker build -f=istylepy -t istylepy .
 
 # format some codes
-docker run --rm --volume $(pwd):/src --workdir /src istylepy bash -c "isort . && flake8 . && black ."
+docker run --rm --volume "$(pwd):/src" --workdir /src istylepy bash -c "isort . && flake8 . && black ."
 
 # enter into shell
-docker run -it --rm --volume $(pwd):/src istylepy
+docker run -it --rm --volume "$(pwd):/src" --workdir /src istylepy
 
 # run with specific user
-docker run -it --rm --volume $(pwd):/src --user "$(id -u)":"$(id -g)" istylepy
+docker run -it --rm --volume "$(pwd):/src" --workdir /src --user "$(id -u)":"$(id -g)" istylepy
 
-# printf "docker run --rm --volume $(PWD):/src --workdir /src istylepy:latest black . && isort . --profile black" | pbcopy
+# printf "docker run --rm --volume "$(PWD):/src" --workdir /src istylepy:latest black . && isort . --profile black" | pbcopy
 ```
 
 # Misc
